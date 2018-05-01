@@ -10,3 +10,12 @@ VERSION or DATE:
 HOW TO START THIS PROJECT:
 AUTHORS:Amartya DS, Arun S
 USER INSTRUCTIONS:
+
+
+Atoms : A-Z
+Brackets: ()
+Or: ||
+And: &&
+Implies: ->
+Not: ~
+Turnstile: |-
