@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Formula()
-comment1.params=lhs\ op
-comment1.target=Formula(Formula,\ Operator)
-comment2.params=lhs\ op\ rhs
-comment2.target=Formula(Formula,\ Operator,\ Formula)
+comment1.params=c
+comment1.target=Formula(char)
+comment2.params=c
+comment2.target=Formula(char[])
 comment3.params=s
 comment3.target=Formula(java.lang.String)
 comment4.params=s
-comment4.target=Formula\ parse(java.lang.String)
+comment4.target=char[]\ parse(java.lang.String)
 numComments=5
