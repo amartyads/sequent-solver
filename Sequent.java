@@ -28,7 +28,34 @@ public class Sequent
         // split rhs and lhs along ','
         // trim individual string for spaces
         // run formula.parse on each split string, add to arraylist
-        return null;
+        String[] sParsed;
+        Sequent sq = new Sequent();
+        if(s.contains("|-"))
+        {
+            sParsed = s.split("\\|\\-");
+        }
+        else
+        {
+            sParsed = new String[2];
+            sParsed[0] = "";
+            sParsed[1] = s;
+        }
+        
+        sParsed[0] = sParsed[0].trim();
+        sParsed[1] = sParsed[1].trim();
+        
+        String[] lStr = sParsed[0].split(",");
+        String[] rStr = sParsed[1].split(",");
+        
+        for(String i: lStr)
+        {
+            sq.lhs.add(new Formula(i));
+        }
+        for(String i: rStr)
+        {
+            sq.rhs.add(new Formula(i));
+        }
+        return sq;
     }
     public String toString()
     {
