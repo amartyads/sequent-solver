@@ -18,6 +18,10 @@ public class Formula
     {
         preForm = parse(s);
     }
+    public int length()
+    {
+        return preForm.length;
+    }
     public static char[] parse(String s)
     {
         // check for parse error, match patterns
