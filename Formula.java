@@ -13,6 +13,7 @@ public class Formula
     {
         this.lhs = lhs;
         this.op = op;
+        this.rhs = null;
     }
     public Formula(Formula lhs, Operator op, Formula rhs)
     {
