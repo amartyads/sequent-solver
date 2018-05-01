@@ -4,6 +4,5 @@ public enum Operator
     AND,
     OR,
     IMP,
-    NOT,
-    TURN
+    NOT
 }

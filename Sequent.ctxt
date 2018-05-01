@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Sequent()
+comment1.params=lhs\ rhs
+comment1.target=Sequent(java.util.ArrayList,\ java.util.ArrayList)
+numComments=2
