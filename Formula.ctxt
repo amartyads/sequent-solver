@@ -8,5 +8,5 @@ comment2.target=Formula(Formula,\ Operator,\ Formula)
 comment3.params=s
 comment3.target=Formula(java.lang.String)
 comment4.params=s
-comment4.target=void\ parse(java.lang.String)
+comment4.target=Formula\ parse(java.lang.String)
 numComments=5

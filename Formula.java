@@ -23,9 +23,16 @@ public class Formula
     }
     public Formula(String s)
     {
-        parse(s);
+        Formula ans = Formula.parse(s);
+        this.lhs = ans.lhs;
+        this.op = ans.op;
+        this.rhs = ans.rhs;
     }
-    public void parse(String s)
+    public static Formula parse(String s)
     {
+        // check for parse error, match patterns
+        // if wrong, exit immediately
+        // recursively call parse and match operators every call
+        return null;
     }
 }
