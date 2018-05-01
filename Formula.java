@@ -108,7 +108,40 @@ public class Formula
                     stack[++qt] = c;
             }
         }
+        //Convert Postfix expression to expression tree
+        ArrayList<Formula> fst = new ArrayList<Formula>();
+        int pos = -1;
+        for(int i = 0; i < postfix.length; ++i)
+        {
+            char c = postfix[i];
+            if(Character.isLetter(c))
+            {
+                fst.add(new Formula(c));
+                pos++;
+            }
+            else if(c == '~')
+            {
+                Formula temp = new Formula(fst.remove(pos),Operator.NOT);
+                fst.add(temp);
+                pos--;
+            }
+            else if(c == '|'){
+                Formula temp = new Formula(fst.remove(pos),Operator.OR,fst.remove(pos-1));
+                fst.add(temp);
+                pos-=2;
+            }
+            else if(c == '&'){
+                Formula temp = new Formula(fst.remove(pos),Operator.AND,fst.remove(pos-1));
+                fst.add(temp);
+                pos-=2;
+            }
+            else if(c == '>'){
+                Formula temp = new Formula(fst.remove(pos),Operator.IMP,fst.remove(pos-1));
+                fst.add(temp);
+                pos-=2;
+            }
+        }
         
-        return null;
+        return fst.get(0);
     }
 }
