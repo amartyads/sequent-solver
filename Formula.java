@@ -1,28 +1,45 @@
 public class Formula
 {
-    public char[] preForm;
+    public Formula lhs;
+    public Formula rhs;
+    public Operator op;
+    public char atom;
     public Formula()
     {
-        preForm = null;
+        lhs = null;
+        op = Operator.NULL;
+        rhs = null;
+        atom = '!';
+    }
+    public Formula(Formula lhs, Operator op)
+    {
+        this.lhs = lhs;
+        this.op = op;
+        this.rhs = null;
+        atom = '!';
+    }
+    public Formula(Formula lhs, Operator op, Formula rhs)
+    {
+        this.lhs = lhs;
+        this.op = op;
+        this.rhs = rhs;
+        atom = '!';
     }
     public Formula(char c)
     {
-        preForm = new char[1];
-        preForm[0] = c;
-    }
-    public Formula(char[] c)
-    {
-        preForm = c;
+        atom = c;
+        lhs = null;
+        op = Operator.NULL;
+        rhs = null;
     }
     public Formula(String s)
     {
-        preForm = parse(s);
+        Formula ans = Formula.parse(s);
+        this.lhs = ans.lhs;
+        this.op = ans.op;
+        this.rhs = ans.rhs;
     }
-    public int length()
-    {
-        return preForm.length;
-    }
-    public static char[] parse(String s)
+    public static Formula parse(String s)
     {
         // check for parse error, match patterns
         // if wrong, exit immediately
