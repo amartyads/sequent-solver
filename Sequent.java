@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 public class Sequent
 {
     public ArrayList<Formula> lhs;
@@ -28,5 +29,32 @@ public class Sequent
         // trim individual string for spaces
         // run formula.parse on each split string, add to arraylist
         return null;
+    }
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        int i;
+        try
+        {
+            sb.append(lhs.get(0).toString());
+            for(i = 1; i < lhs.size(); i++)
+            {
+                sb.append(", ");
+                sb.append(lhs.get(i));
+            }
+        }
+        catch(Exception e) {}
+        sb.append(" |- ");
+        try
+        {
+            sb.append(rhs.get(0).toString());
+            for(i = 1; i < rhs.size(); i++)
+            {
+                sb.append(", ");
+                sb.append(rhs.get(i));
+            }
+        }
+        catch(Exception e) {}
+        return sb.toString();
     }
 }

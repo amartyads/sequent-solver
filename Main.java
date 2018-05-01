@@ -9,6 +9,6 @@ public class Main
         //solve init
         SolutionTree stree = Solver.solve(init);
         //print the tree
-        stree.print();
+        SolutionTree.print(stree);
     }
 }

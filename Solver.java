@@ -12,7 +12,7 @@ public class Solver
                 {
                     if(r.op == Operator.NULL && r.atom == l.atom)
                     {
-                        return new SolutionTree(true);
+                        return new SolutionTree(1);
                     }
                 }
             }
@@ -106,6 +106,6 @@ public class Solver
                 return toRet;
             }
         }
-        return new SolutionTree(false);
+        return new SolutionTree(2);
     }
 }

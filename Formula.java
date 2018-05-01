@@ -46,4 +46,29 @@ public class Formula
         // recursively call parse and match operators every call
         return null;
     }
+    public String toString()
+    {
+        if(op == Operator.NULL)
+            return Character.toString(atom);
+        else
+        {
+            String oper = "";
+            switch(op)
+            {
+                case AND:
+                    oper = " & ";
+                    break;
+                case OR:
+                    oper = " | ";
+                    break;
+                case IMP:
+                    oper = " > ";
+                    break;
+                case NOT:
+                    oper = " ~ ";
+                    break;
+            }
+            return (lhs.toString() + oper + rhs.toString());
+        }
+    }
 }
