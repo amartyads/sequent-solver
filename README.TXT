@@ -28,10 +28,12 @@ Implies: >
 Not: ~
 Turnstile: |-
 
+Please note: the system does not recognize operator precedence, please parenthesize accordingly.
+
 Example:
 java Main "((A>L)>A)>A"
 
-Some tested formulae (some do not hold):
+Some tested formulae (some do not hold, included for demonstration):
 "(A),(~B&C)|-~B"
 "~(B&C)|-~B|~C"
 "A|-~A"                         -Unsatisfiable
@@ -43,3 +45,4 @@ Some tested formulae (some do not hold):
 "((A&B)>A)"
 "(A>A)"
 "(A)|-(A)"
+"(A&(B|C))>((A&B)|(A&C))"
