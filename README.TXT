@@ -1,5 +1,7 @@
 PROJECT TITLE: Sequent calculus solver
 
+GIT LINK: https://github.com/amartyads/sequent-solver.git
+
 HOW TO START THIS PROJECT:
 1) unzip the contents
 2) navigate to folder
