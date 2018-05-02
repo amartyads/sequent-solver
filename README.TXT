@@ -27,6 +27,7 @@ And: &
 Implies: >
 Not: ~
 Turnstile: |-
+Comma: ,
 
 Please note: the system does not recognize operator precedence, please parenthesize accordingly.
 
