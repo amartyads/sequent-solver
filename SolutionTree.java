@@ -2,22 +2,26 @@ public class SolutionTree
 {
     public Sequent sequent;
     public SolutionTree lChild, rChild;
+    public String step;
     public int solved; // 0 not atom 1 solved 2 unsolved
     public SolutionTree()
     {
         sequent = null;
         lChild = null;
         rChild = null;
+        step = "";
         solved = 2;
     }
     public SolutionTree(Sequent sequent)
     {
         this.sequent = sequent;
+        step = "";
         solved = 0;
     }
-    public SolutionTree(Sequent sequent, int b)
+    public SolutionTree(Sequent sequent, String step, int b)
     {
         this.sequent = sequent;
+        this.step = step;
         solved = b;
     }
     public SolutionTree(int b)
@@ -25,6 +29,7 @@ public class SolutionTree
         sequent = null;
         lChild = null;
         rChild = null;
+        step = "";
         solved = b;
     }
     public static void print(SolutionTree st)
@@ -37,14 +42,15 @@ public class SolutionTree
         {
             System.out.print("    ");
         }
-        System.out.println(st.sequent);
+        System.out.println(st.sequent + "\t\t\t\t" + st.step);
         if(st.solved == 1)
         {
-            System.out.print("Axiom");
+            System.out.print("Solved");
         }
         else if(st.solved == 2)
         {
-            System.out.print("Cannot solve");
+            System.out.print("Cannot solve, exiting...");
+            System.exit(0);
         }
         else
         {

@@ -25,11 +25,11 @@ public class Sequent
         ArrayList<Formula> left = new ArrayList<>(), right = new ArrayList<>();
         for(Formula f: lhs)
         {
-            left.add(f.deepCopy());
+            left.add(f);
         }
         for(Formula f: rhs)
         {
-            right.add(f.deepCopy());
+            right.add(f);
         }
         return new Sequent(left, right);
     }
@@ -56,6 +56,9 @@ public class Sequent
         
         sParsed[0] = sParsed[0].trim();
         sParsed[1] = sParsed[1].trim();
+        
+        if(sParsed[0].length() == 0) sParsed[0] = "T";
+        if(sParsed[1].length() == 0) sParsed[1] = "L";
         
         String[] lStr = sParsed[0].split(",");
         String[] rStr = sParsed[1].split(",");

@@ -5,6 +5,8 @@ public class Formula
     public Formula rhs;
     public Operator op;
     public char atom;
+    public final static Formula TOP = new Formula('T');
+    public final static Formula BOTTOM = new Formula('L');
     public Formula()
     {
         lhs = null;
@@ -58,8 +60,6 @@ public class Formula
         // if wrong, exit immediately
         // recursively call parse and match operators every call
         // Getting infix expression to convert to postfix to expression tree
-        if(s.length() == 0)
-            return new Formula('T');
         char[] infix = new char[s.length()+1];
         for(int k = 0; k < s.length(); ++k)
         {
@@ -108,7 +108,11 @@ public class Formula
         {
             char c = infix[i];
             if(Character.isLetter(c))
+            {
                 postfix[pt++] = c;
+                if(stack[qt] == '~')
+                    postfix[pt++] = stack[qt--];
+            }
             else
             {
                 if(c == '(')
@@ -166,7 +170,7 @@ public class Formula
                 pos--;
             }
         }
-
+        
         return fst.get(0);
     }
     public String toString()
@@ -176,22 +180,24 @@ public class Formula
         else
         {
             String oper = "";
-            switch(op)
+            if(op != Operator.NOT)
             {
-                case AND:
-                    oper = " & ";
-                    break;
-                case OR:
-                    oper = " | ";
-                    break;
-                case IMP:
-                    oper = " > ";
-                    break;
-                case NOT:
-                    oper = " ~ ";
-                    break;
+                switch(op)
+                {
+                    case AND:
+                        oper = " & ";
+                        break;
+                    case OR:
+                        oper = " | ";
+                        break;
+                    case IMP:
+                        oper = " > ";
+                        break;
+                }
+                return ("( " + lhs.toString() + oper + rhs.toString() + " )");
             }
-            return (lhs.toString() + oper + rhs.toString());
+            else
+                return ("~" + lhs.toString());
         }
     }
 }
