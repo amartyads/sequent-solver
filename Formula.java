@@ -33,12 +33,24 @@ public class Formula
         op = Operator.NULL;
         rhs = null;
     }
+    public Formula(Formula lhs, Operator op, Formula rhs, char atom)
+    {
+        this.lhs = lhs;
+        this.op = op;
+        this.rhs = rhs;
+        this.atom = atom;
+    }
     public Formula(String s)
     {
         Formula ans = Formula.parse(s.trim());
         this.lhs = ans.lhs;
         this.op = ans.op;
         this.rhs = ans.rhs;
+        this.atom = ans.atom;
+    }
+    public Formula deepCopy()
+    {
+        return new Formula(lhs, op, rhs, atom);
     }
     public static Formula parse(String s)
     {
@@ -46,7 +58,9 @@ public class Formula
         // if wrong, exit immediately
         // recursively call parse and match operators every call
         // Getting infix expression to convert to postfix to expression tree
-        char[] infix = new char[s.length()];
+        if(s.length() == 0)
+            return new Formula('T');
+        char[] infix = new char[s.length()+1];
         for(int k = 0; k < s.length(); ++k)
         {
             char i = s.charAt(k);
@@ -62,11 +76,13 @@ public class Formula
                     
                 case '>':
                     infix[k] = i;
-                    break;   
+                    break;
+                case ' ':
+                    break;
                 default:
                     if(Character.isLetter(i))
                     {
-                        if(k < s.length() && Character.isLetter(s.charAt(k+1)))
+                        if(k < s.length()-1 && Character.isLetter(s.charAt(k+1)))
                         {
                              System.out.println("Invalid Input");
                              System.exit(0);
@@ -81,11 +97,12 @@ public class Formula
                     break;
             }
         }
+        infix[infix.length-1] = ')';
         //Conversion from infix to postfix
-        Stack st = new Stack();
-        char[] postfix = new char[s.length()];
-        char[] stack = new char[s.length()];
-        int qt = -1;
+        char[] postfix = new char[s.length()+1];
+        char[] stack = new char[s.length()+1];
+        stack[0] = '(';
+        int qt = 0;
         int pt = 0;
         for(int i = 0; i < infix.length; ++i)
         {
@@ -109,7 +126,48 @@ public class Formula
             }
         }
         
-        return null;
+        //Convert Postfix expression to expression tree
+        ArrayList<Formula> fst = new ArrayList<Formula>();
+        int pos = -1;
+        for(int i = 0; i < postfix.length; ++i)
+        {
+            char c = postfix[i];
+            if(c == '\u0000')
+                continue;
+            if(Character.isLetter(c))
+            {
+                fst.add(new Formula(c));
+                pos++;
+            }
+            else if(c == '~')
+            {
+                Formula temp = new Formula(fst.remove(pos),Operator.NOT);
+                fst.add(temp);
+            }
+            else if(c == '|'){
+                Formula temp = new Formula(fst.get(pos-1),Operator.OR,fst.get(pos));
+                fst.remove(pos);
+                fst.remove(pos-1);
+                fst.add(temp);
+                pos--;
+            }
+            else if(c == '&'){
+                Formula temp = new Formula(fst.get(pos-1),Operator.AND,fst.get(pos));
+                fst.remove(pos);
+                fst.remove(pos-1);
+                fst.add(temp);
+                pos--;
+            }
+            else if(c == '>'){
+                Formula temp = new Formula(fst.get(pos-1),Operator.IMP,fst.get(pos));
+                fst.remove(pos);
+                fst.remove(pos-1);
+                fst.add(temp);
+                pos--;
+            }
+        }
+
+        return fst.get(0);
     }
     public String toString()
     {

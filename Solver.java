@@ -12,14 +12,14 @@ public class Solver
                 {
                     if(r.op == Operator.NULL && r.atom == l.atom)
                     {
-                        return new SolutionTree(1);
+                        return new SolutionTree(sequent.deepCopy(),1);
                     }
                 }
             }
         }
         
         // ~L &L
-        SolutionTree toRet = new SolutionTree(sequent);
+        SolutionTree toRet = new SolutionTree(sequent.deepCopy());
         for(Formula f: sequent.lhs)
         {
             if(f.op == Operator.NOT)

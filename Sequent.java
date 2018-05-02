@@ -20,6 +20,19 @@ public class Sequent
         this.lhs = ans.lhs;
         this.rhs = ans.rhs;
     }
+    public Sequent deepCopy()
+    {
+        ArrayList<Formula> left = new ArrayList<>(), right = new ArrayList<>();
+        for(Formula f: lhs)
+        {
+            left.add(f.deepCopy());
+        }
+        for(Formula f: rhs)
+        {
+            right.add(f.deepCopy());
+        }
+        return new Sequent(left, right);
+    }
     public static Sequent parse(String s)
     {
         // look for substring "|-"
